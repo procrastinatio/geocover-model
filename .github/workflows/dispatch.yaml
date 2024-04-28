@@ -1,7 +1,12 @@
-name: Generate Word Doc
+name: Generate DOCX document
+
+
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - master
 
 jobs:
   convert_via_pandoc:
@@ -19,10 +24,10 @@ jobs:
           pandoc -s -f markdown -t docx  -V papersize:a4 --number-sections --shift-heading-level-by=-1 \
           --metadata-file=metadata_de.yaml --variable mainfont="DejaVu Sans" \
           -o "gh-actions-pandoc-datamodel_de.docx"  "datamodel_de.md"
-
-
-      # output generated file to build artifacts
-      - uses: actions/upload-artifact@v3
+          
+      - name: Output docx
+        uses: actions/upload-artifact@v4
         with:
-          name: Word Doc
+          name: Datamodel Geocover (DE)
           path: "gh-actions-pandoc-datamodel_de.docx"
+     
