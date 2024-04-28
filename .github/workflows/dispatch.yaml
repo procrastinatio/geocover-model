@@ -1,0 +1,27 @@
+name: Generate Word Doc
+
+on:
+  workflow_dispatch:
+
+jobs:
+  convert_via_pandoc:
+    runs-on: ubuntu-20.04
+    container: 
+      image: pandoc/latex:latest
+
+    steps:
+      # checkout repo contents
+      - uses: actions/checkout@v4
+
+      # run pandoc to generate word doc from markdown
+      - name: run pandoc
+        run: >|
+          pandoc -s -f markdown -t docx  -V papersize:a4 --number-sections --shift-heading-level-by=-1 --metadata-file=metadata_de.yaml 
+          --variable mainfont="DejaVu Sans" -o "gh-actions-pandoc-datamodel_de.docx $"  "datamodel_de.md"
+
+
+      # output generated file to build artifacts
+      - uses: actions/upload-artifact@v3
+        with:
+          name: Word Doc
+          path: "gh-actions-pandoc-datamodel_de.docx $"
