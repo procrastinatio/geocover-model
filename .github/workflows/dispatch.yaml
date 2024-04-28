@@ -15,9 +15,10 @@ jobs:
 
       # run pandoc to generate word doc from markdown
       - name: run pandoc
-        run: >|
-          pandoc -s -f markdown -t docx  -V papersize:a4 --number-sections --shift-heading-level-by=-1 --metadata-file=metadata_de.yaml 
-          --variable mainfont="DejaVu Sans" -o "gh-actions-pandoc-datamodel_de.docx $"  "datamodel_de.md"
+        run: |
+          pandoc -s -f markdown -t docx  -V papersize:a4 --number-sections --shift-heading-level-by=-1 \
+          --metadata-file=metadata_de.yaml --variable mainfont="DejaVu Sans" \
+          -o "gh-actions-pandoc-datamodel_de.docx"  "datamodel_de.md"
 
 
       # output generated file to build artifacts
