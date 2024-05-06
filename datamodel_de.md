@@ -1,5 +1,5 @@
 
-# Geologisches Datamodel, Revision 3.1 #
+# Datenmodell Geologie, Revision 3.1 #
 
 
 
